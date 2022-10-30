@@ -1,5 +1,4 @@
 
-
 from typing import Callable
 
 """Return the factorial of n, an exact integer >= 0.
@@ -25,30 +24,22 @@ from typing import Callable
     OverflowError: n too large
     """
 
-def safe_call(func: Callable,*args,**kwargs):
+def safe_call(func: Callable ,*args ,**kwargs):
     annotations = func.__annotations__
-    print(func.__annotations__)
     if args:
-        list = locals()['args']
-        vars ={}
-        i = 0
-        for k in annotations.keys():
-            vars[k] = list[i]
-            i+=1
+        l = locals()['args']
+        vars =dict(zip(list(annotations.keys()), l))
         print("args", vars)
     else:
         vars = locals()['kwargs']
-    print("vars",vars)
+    print("vars", vars)
     for x in annotations.keys():
         if annotations[x] is not type(vars[x]):
-
-            raise ValueError("ERROR")
-
-    print('~~~~~~~~~~~')
+            raise ValueError("Annotation does not match")
 
 
-def f(y: float, x: int, z = 5):
+def f(y: float, x: int, z=5):
     return x + y + z
 
 
-safe_call(f,2.3,1,6)
+safe_call(f, 2.3, 1, 6)

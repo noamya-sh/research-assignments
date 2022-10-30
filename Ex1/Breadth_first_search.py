@@ -30,4 +30,4 @@ def n(node: tuple):
     return [(x, y - 1), (x + 1, y), (x - 1, y), (x, y + 1)]
 
 
-print(Breadth_first_search((0, 0), (3, 1), n))
+print(Breadth_first_search((0, 0), (3, 5), n))

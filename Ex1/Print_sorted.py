@@ -1,17 +1,17 @@
-# import json
-#
-#
-# def print_sorted(x):
-#     list = []
-#     for i in enumerate(x):
-#         list.append(str(i))
-#     list.sort()
-#     print(list)
-#
+import doctest
+
+
+def print_sorted(struct):
+    # help function
+    print(helpi(struct))
+
+
 def helpi(struct):
+    # To sort lexically, create a new data structure based on the input type.
     input_class = type(struct)
     if input_class == dict:
         output_dict = {}
+        # for any key&value perform a recursion to create a sorted string.
         for k, v in struct.items():
             if type(k) in [list, dict, tuple, set]:
                 if type(v) in [list, dict, tuple, set]:
@@ -23,17 +23,18 @@ def helpi(struct):
                     output_dict[str(k)] = helpi(v)
                 else:
                     output_dict[str(k)] = str(v)
-        print("aa", {i[0]: i[1] for i in sorted(output_dict.items())})
-        print("bb", str({i[0]: i[1] for i in sorted(output_dict.items())}))
-        return str({i[0]: i[1] for i in sorted(output_dict.items())})
+        # return string of new dict in a sorted manner and without text distortion
+        return str({i[0]: i[1] for i in sorted(output_dict.items())}).replace("\\", "")
     else:
         output_list = []
+        # for any element perform a recursion to create a sorted string.
         for i in struct:
             if type(i) in [list, dict, tuple, set]:
                 output_list.append(helpi(i))
             else:
                 output_list.append(str(i))
-        return str(input_class(sorted(output_list)))
+        # return string of new list in a sorted manner and without text distortion
+        return str(input_class(sorted(output_list))).replace("\\", "")
 
 
 #
@@ -49,7 +50,7 @@ def helpi(struct):
 # print(input_class(sorted(output_list)))
 
 r = [{5: 'v', 7: [2]}, "ss", 4, [9, 7], (1, 3, 2, 3), 5]
-print(helpi(r))
+print_sorted(r)
 
 # c = {'c':2,'a':[5,1,2]}
 #
@@ -65,12 +66,3 @@ print(helpi(r))
 # print(k)
 # # helpi(r)
 # # print(sorted(r))
-"1 2 3 4 5 6 7 8 9" \
-"4 5 6 7 8 9 1 2 3" \
-"7 8 9 1 2 3 4 5 6" \
-"9 1 2 3 4 5 6 7 8" \
-"3 4 5 6 7 8 9 1 2" \
-"6 7 8 9 1 2 3 4 5" \
-"8 9 1 2 3 4 5 6 7" \
-"2 3 4 5 6 7 8 9 1" \
-"5 6 7 8 9 1 2 3 4"

@@ -4,6 +4,27 @@ from typing import Callable
 
 
 def Breadth_first_search(start: tuple, end: tuple, neighbor_function: Callable) -> list:
+    """Get path from 'start' node to 'end' node by neighbor function.
+            >>> def n(node: tuple):
+            ...     x, y = node
+            ...     return [(x, y - 1), (x + 1, y), (x - 1, y), (x, y + 1)]
+            >>>
+            >>> Breadth_first_search((1,1),(3,2),n)
+            [(1, 1), (2, 1), (3, 1), (3, 2)]
+            >>> Breadth_first_search((5,7),(2,1),n)
+            [(5, 7), (5, 6), (5, 5), (5, 4), (5, 3), (5, 2), (5, 1), (4, 1), (3, 1), (2, 1)]
+            >>> def k(node: tuple):
+            ...     x, y = node
+            ...     return [ (x, y + 1),(x + 1, y),(x, y - 1), (x - 1, y)]
+            >>> Breadth_first_search((1,1),(3,2),k)
+            [(1, 1), (1, 2), (2, 2), (3, 2)]
+            >>> def g(node: tuple):
+            ...     x, y, z = node
+            ...     return [(x, y - 1,z), (x, y ,z -1), (x -1, y ,z), (x, y + 1, z),
+            ... (x +1, y ,z),(x , y ,z +1)]
+            >>> Breadth_first_search((1,1,2),(3,1,2),g)
+            [(1, 1, 2), (2, 1, 2), (3, 1, 2)]
+            """
     visited = {start: True}
     queue = [(start, [start])]
     while queue:
@@ -18,16 +39,7 @@ def Breadth_first_search(start: tuple, end: tuple, neighbor_function: Callable) 
 
     return []
 
-
-g = []
-for i in range(10):
-    for j in range(10):
-        g.append((i, j))
+if __name__ == "__main__":
+    doctest.testmod()
 
 
-def n(node: tuple):
-    x, y = node
-    return [(x, y - 1), (x + 1, y), (x - 1, y), (x, y + 1)]
-
-
-print(Breadth_first_search((0, 0), (3, 5), n))

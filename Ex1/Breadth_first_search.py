@@ -24,12 +24,18 @@ def Breadth_first_search(start: tuple, end: tuple, neighbor_function: Callable) 
             ... (x +1, y ,z),(x , y ,z +1)]
             >>> Breadth_first_search((1,1,2),(3,1,2),g)
             [(1, 1, 2), (2, 1, 2), (3, 1, 2)]
+            >>> Breadth_first_search((5,8,2),(5,8,2),g)
+            []
             """
-    visited = {start: True}
-    queue = [(start, [start])]
+    if start == end:
+        return []
+
+    # perform bfs
+    visited = {start: True}  # for prevent cycle
+    queue = [(start, [start])]  # init with node and path
     while queue:
         node, path_node = queue.pop(0)
-        neighbor_list = neighbor_function(node)
+        neighbor_list = neighbor_function(node)  # function given in input
         for neighbor in neighbor_list:
             if neighbor not in visited:
                 if neighbor == end:
@@ -39,7 +45,6 @@ def Breadth_first_search(start: tuple, end: tuple, neighbor_function: Callable) 
 
     return []
 
+
 if __name__ == "__main__":
     doctest.testmod()
-
-

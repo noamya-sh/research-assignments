@@ -66,12 +66,9 @@ def safe_call(func: Callable, *args, **kwargs):
         raise ValueError("Arguments are missing")
 
     for x in annotations.keys():
+        # If a change in input type is found
         if annotations[x] is not type(vars[x]):
             raise ValueError("Annotation does not match")
 
-
-def f(y: float, x: int, z=5):
-    return x + y + z
-
-
-safe_call(f, 2.3, 1, 6)
+if __name__ == "__main__":
+    doctest.testmod()

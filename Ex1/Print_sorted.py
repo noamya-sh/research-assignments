@@ -2,6 +2,18 @@ import doctest
 
 
 def print_sorted(struct):
+    """Print the data structure sorted (also in depth).
+                >>> print_sorted([{5: 'v', 7: [2]}, "ss", 4, [9, 7], (1, 3, 2, 3), 5])
+                ["('1', '2', '3', '3')", '4', '5', "['7', '9']", 'ss', '{'5': 'v', '7': "['2']"}']
+                >>> print_sorted({(8,7,(9,6, (5,4, (3,2,(1,0)))))})
+                {'('('('("('0', '1')", '2', '3')', '4', '5')', '6', '9')', '7', '8')'}
+                >>> print_sorted({'A':[9,1,5],(8.2,1,9.7):[8,1,2],'b':{'h':['k',2,"as"]}})
+                {"('1', '8.2', '9.7')": "['1', '2', '8']", 'A': "['1', '5', '9']", 'b': '{'h': "['2', 'as', 'k']"}'}
+                >>> print_sorted({80,5,[2,1]})
+                Traceback (most recent call last):
+                    ...
+                TypeError: unhashable type: 'list'
+                """
     # help function
     print(helpi(struct))
 
@@ -36,33 +48,5 @@ def helpi(struct):
         # return string of new list in a sorted manner and without text distortion
         return str(input_class(sorted(output_list))).replace("\\", "")
 
-
-#
-# def f(struct):
-#     for i in struct:
-#         if type(i) in [list, dict, tuple, set]:
-#             return f(i)
-#     return str(struct)
-#
-# # print_sorted([4, {'a': "v", 'c': [2]}, (1, 3,2, 3)])
-# input_class = type((2,1,3))
-# output_list = [2,1,3]
-# print(input_class(sorted(output_list)))
-
-r = [{5: 'v', 7: [2]}, "ss", 4, [9, 7], (1, 3, 2, 3), 5]
-print_sorted(r)
-
-# c = {'c':2,'a':[5,1,2]}
-#
-# x = str({str(i[0]):str(i[1]) for i in sorted(c.items())})
-# print(x)
-# k = []
-# for i in r:
-#     if type(i) in [list, dict, tuple, set]:
-#         k.append(str(sorted(i)))
-#     else:
-#         k.append(str(i))
-# k.sort()
-# print(k)
-# # helpi(r)
-# # print(sorted(r))
+if __name__ == "__main__":
+    doctest.testmod()

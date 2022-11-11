@@ -1,8 +1,8 @@
-def help(l, ind):
+def getListItem(l:list, ind:list):
     if len(ind) == 1:
         return l[ind[0]]
     else:
-        return help(l[ind[0]], ind[1:])
+        return getListItem(l[ind[0]], ind[1:])
 
 
 class MultiArray(list):
@@ -10,18 +10,12 @@ class MultiArray(list):
     def __init__(self, *args):
         list.__init__(self, *args)
 
-    def __getitem__(self, item):
-        if len(str(item)) == 1:
-            return super(MultiArray, self).__getitem__(item)
+    def __getitem__(self, ind):
+        if len(str(ind)) == 1:
+            return super(MultiArray, self).__getitem__(ind)
         else:
-            item = list(item)
-            return help(super(MultiArray, self).__getitem__(item[0]), item[1:])
-            # if len(item) == 2:
-            #     return super(MultiArray, self).__getitem__(item[0])[item[1]]
-            # if len(item) == 3:
-            #     return super(MultiArray, self).__getitem__(item[0])[item[1]][item[2]]
-        # except:
-        #     print("err")
+            ind = list(ind)
+            return getListItem(super(MultiArray, self).__getitem__(ind[0]), ind[1:])
 
 
 x = MultiArray([[[91, 42, 56], [19, 14, 15]], [[1, 2, 3], [9, 4, 2]], [[11, 47, 53], [85, 21, 35]]])

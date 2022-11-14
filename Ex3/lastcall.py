@@ -1,7 +1,21 @@
 from typing import Callable
-
+import doctest
 
 def lastcall(func: Callable):
+    """
+    >>> @lastcall
+    ... def k(s: str):
+    ...     return s*2
+    >>> k("Good")
+    'GoodGood'
+    >>> k("Good")
+    I already told you that the answer is GoodGood
+    >>> k(5)
+    10
+    >>> k(5)
+    I already told you that the answer is 10
+    """
+
     dic = {}
 
     def warpper(*args, **kwargs):
@@ -9,17 +23,20 @@ def lastcall(func: Callable):
             arguments = args
         elif kwargs:
             arguments = kwargs
-        else:
-            raise ValueError("there is no argument")
-        if len(arguments) > 1:
-            raise ValueError("only one argument")
+        # else:
+        #     raise ValueError("there is no argument")
+        # if len(str(arguments)) > 1:
+        #     raise ValueError("only one argument")
 
-        if dic[(func, arguments)]:
-            print(f'I already told you that the answer is {dic[(func, arguments)]}')
+        if func in dic and arguments in dic[func]:
+            print(f'I already told you that the answer is {dic[func][arguments]}')
         else:
+            if func not in dic:
+                dic.setdefault(func,{})
+
             val = func(*args, **kwargs)
-            dic[(func, arguments)] = val
-        return val
+            dic[func][arguments] = val
+            return val
 
     return warpper
 
@@ -29,5 +46,5 @@ def f(x: int):
     return x ** 2
 
 
-f(2)
-f(2)
+if __name__ == "__main__":
+    doctest.testmod()

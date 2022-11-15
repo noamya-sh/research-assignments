@@ -22,15 +22,15 @@ def lastcall(func: Callable):
     >>> h((6,2))
     I already told you that the answer is 3.0
     >>> @lastcall
-    ... def g(s:str):
+    ... def g(d:dict):
     ...     ans = ""
-    ...     for i in s:
-    ...         ans+=i*2
+    ...     for k,v in d.items():
+    ...         ans+=str(k)+":"+str(v)+" "
     ...     return ans
-    >>> g("dog")
-    'ddoogg'
-    >>> g("dog")
-    I already told you that the answer is ddoogg
+    >>> g({"aba":1,5:6,(1,2,3):4})
+    'aba:1 5:6 (1, 2, 3):4 '
+    >>> g({"aba":1,5:6,(1,2,3):4})
+    I already told you that the answer is aba:1 5:6 (1, 2, 3):4
     """
 
     dic = {}
@@ -42,7 +42,8 @@ def lastcall(func: Callable):
             arguments = kwargs
         else:
             raise ValueError("there is no argument")
-
+        if type(arguments[0]) in (dict ,list):
+            arguments = str(arguments)
         if func in dic and arguments in dic[func]:
             print(f'I already told you that the answer is {dic[func][arguments]}')
         else:
@@ -54,6 +55,7 @@ def lastcall(func: Callable):
             return val
 
     return warpper
+
 
 if __name__ == "__main__":
     doctest.testmod()

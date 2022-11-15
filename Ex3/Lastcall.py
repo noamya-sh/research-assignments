@@ -1,8 +1,10 @@
-from typing import Callable,List
+from typing import Callable
 import doctest
+
 
 def lastcall(func: Callable):
     """
+    Decorator function to prevent repeated activation of a function on the same input.
     >>> @lastcall
     ... def k(s):
     ...     return s*2
@@ -32,7 +34,7 @@ def lastcall(func: Callable):
     >>> g({"aba":1,5:6,(1,2,3):4})
     I already told you that the answer is aba:1 5:6 (1, 2, 3):4
     """
-
+    # To store the functions and inputs
     dic = {}
 
     def warpper(*args, **kwargs):
@@ -42,13 +44,16 @@ def lastcall(func: Callable):
             arguments = kwargs
         else:
             raise ValueError("there is no argument")
-        if type(arguments[0]) in (dict ,list):
+        # dict and list not hashable -> convert to str
+        if type(arguments[0]) in (dict, list):
             arguments = str(arguments)
+
+        # If the function has already been run on this input
         if func in dic and arguments in dic[func]:
             print(f'I already told you that the answer is {dic[func][arguments]}')
         else:
             if func not in dic:
-                dic.setdefault(func,{})
+                dic.setdefault(func, {})
 
             val = func(*args, **kwargs)
             dic[func][arguments] = val

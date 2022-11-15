@@ -1,4 +1,4 @@
-from typing import Callable
+from typing import Callable,List
 import doctest
 
 def lastcall(func: Callable):
@@ -21,6 +21,16 @@ def lastcall(func: Callable):
     3.0
     >>> h((6,2))
     I already told you that the answer is 3.0
+    >>> @lastcall
+    ... def g(s:str):
+    ...     ans = ""
+    ...     for i in s:
+    ...         ans+=i*2
+    ...     return ans
+    >>> g("dog")
+    'ddoogg'
+    >>> g("dog")
+    I already told you that the answer is ddoogg
     """
 
     dic = {}
@@ -44,12 +54,6 @@ def lastcall(func: Callable):
             return val
 
     return warpper
-
-
-@lastcall
-def f(x: int):
-    return x ** 2
-
 
 if __name__ == "__main__":
     doctest.testmod()

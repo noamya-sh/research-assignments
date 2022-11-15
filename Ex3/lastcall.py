@@ -4,7 +4,7 @@ import doctest
 def lastcall(func: Callable):
     """
     >>> @lastcall
-    ... def k(s: str):
+    ... def k(s):
     ...     return s*2
     >>> k("Good")
     'GoodGood'
@@ -14,6 +14,13 @@ def lastcall(func: Callable):
     10
     >>> k(5)
     I already told you that the answer is 10
+    >>> @lastcall
+    ... def h(t:tuple):
+    ...     return t[0]/t[1]
+    >>> h((6,2))
+    3.0
+    >>> h((6,2))
+    I already told you that the answer is 3.0
     """
 
     dic = {}
@@ -23,10 +30,8 @@ def lastcall(func: Callable):
             arguments = args
         elif kwargs:
             arguments = kwargs
-        # else:
-        #     raise ValueError("there is no argument")
-        # if len(str(arguments)) > 1:
-        #     raise ValueError("only one argument")
+        else:
+            raise ValueError("there is no argument")
 
         if func in dic and arguments in dic[func]:
             print(f'I already told you that the answer is {dic[func][arguments]}')

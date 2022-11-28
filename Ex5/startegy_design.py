@@ -41,6 +41,9 @@ def getMST(algoritm: Callable, graph: list, mst: Mst = MstKeepingSum):
 
 
 def Kruskal(mst: Mst, graph: Graph) -> Mst:
+    """
+    Kruskal algorithm for finding a minimum spanning tree using root union.
+    """
     # init list to contain roots for each vertice
     parent = [i for i in range(graph.vertices)]
 
@@ -81,6 +84,9 @@ def Kruskal(mst: Mst, graph: Graph) -> Mst:
 
 
 def Prim(mst: Mst, graph: Graph) -> Mst:
+    """
+    Prim algorithm for finding a minimal spanning tree using a cut.
+    """
     # init list to know if each vertice inside MST (in same side of cut)
     inside = [True] + [False] * (graph.vertices - 1)
 

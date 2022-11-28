@@ -1,7 +1,7 @@
 from typing import Callable
 from mst import *
 import doctest
-
+# For Prim and Kruskal coding I was inspired by geeksforgeeks.com
 
 def getMST(algoritm: Callable, graph: list, mst: Mst = MstKeepingSum):
     """

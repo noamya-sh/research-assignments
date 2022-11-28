@@ -25,14 +25,14 @@ def bounded_subset(s: List[int], c: int):
     [50, 52]
     [50, 53]
     [51, 52]
-    >>> for s in bounded_subset_sorted([0.2,-4,3.5,2,8],0): print(s)
+    >>> for s in bounded_subset([0.2,-4,3.5,2,8],0): print(s)
+    []
     [-4]
     [-4, 0.2]
     [-4, 2]
-    [-4, 0.2, 2]
     [-4, 3.5]
+    [-4, 0.2, 2]
     [-4, 0.2, 3.5]
-    []
     """
     s = sorted(s)
     for i in range(len(s) + 1):
@@ -83,6 +83,14 @@ def bounded_subset_sorted(s: List[int], c: int):
     [0, 0.5, 1, 2]
     [1, 3]
     [0, 1, 3]
+    >>> for s in bounded_subset_sorted([0.2,-4,3.5,2,8],0): print(s)
+    [-4]
+    [-4, 0.2]
+    [-4, 2]
+    [-4, 0.2, 2]
+    [-4, 3.5]
+    [-4, 0.2, 3.5]
+    []
     """
     s = sorted(s)
     m = len(s)

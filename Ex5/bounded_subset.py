@@ -41,7 +41,7 @@ def bounded_subset(s: List[int], c: int):
         if sum(s[:i]) > c:
             break
 
-        # get all combination with i elements
+        # get all combination(this generator not really subsets) with i elements
         subsets = combinations(s, i)
         for subset in subsets:
             if sum(subset) <= c:
@@ -99,7 +99,7 @@ def bounded_subset_sorted(s: List[int], c: int):
         if sum(s[:i]) > c:
             m = i
             break
-    # get chain of all combination up to m elements,
+    # get chain of all combination (generators, not really subsets) up to m elements,
     # than sort them by sum
     subsets = chain.from_iterable(combinations(s, i) for i in range(m + 1))
     for subset in sorted(subsets, key=sum):

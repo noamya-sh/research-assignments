@@ -12,7 +12,7 @@ def comb(iterable, r, c):
     """
     # my addition: remove unnecessary elements
     so = sorted(iterable)
-    new= iterable.copy()
+    new= list(iterable)
     if r > 1:
         while r < len(so) and sum(so[:r - 1]) <= c < sum(so[:r - 1]) + so[-1]:
                 new.remove(so[-1])
@@ -75,6 +75,16 @@ def bounded_subset(s: List[int], c: int):
     [-4, 2]
     [0.2, -4, 3.5]
     [0.2, -4, 2]
+    >>> for s in bounded_subset(list(range(90,100))+list(range(920,1000)),1000): print(s)
+    []
+    [90]
+    ...
+    [999]
+    [90, 91]
+    [90, 92]
+    ...
+    [91, 92, 93, 94, 95, 96, 97, 98, 99]
+    [90, 91, 92, 93, 94, 95, 96, 97, 98, 99]
     """
     sortedList = sorted(s)
     for i in range(len(s) + 1):
@@ -132,6 +142,15 @@ def bounded_subset_sorted(s: List[int], c: int):
     [-4, 3.5]
     [0.2, -4, 3.5]
     []
+    >>> for s in bounded_subset_sorted(list(range(90,100))+list(range(920,1000)),1000): print(s)
+    []
+    [90]
+    ...
+    [90, 91]
+    [90, 92]
+    ...
+    [998]
+    [999]
     """
     sortedList = sorted(s)
     m = len(s)
@@ -148,6 +167,6 @@ def bounded_subset_sorted(s: List[int], c: int):
 
 
 if __name__ == '__main__':
-    # doctest.testmod(optionflags=doctest.ELLIPSIS)
-    for s in bounded_subset_sorted(list(range(90,100))+list(range(920,1000)),1000):
-        print(s)
+    doctest.testmod(optionflags=doctest.ELLIPSIS)
+    # for s in bounded_subset_sorted(list(range(90,100))+list(range(920,1000)),1000):
+    #     print(s)

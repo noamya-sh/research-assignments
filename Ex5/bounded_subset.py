@@ -2,10 +2,44 @@ import doctest
 from itertools import combinations, chain
 from typing import List
 
+def comb(iterable, r, c):
+    """
+    this is combination gemerator from python docs,
+    with slight changes so that a subgroup will be
+    created only if it is less than or equal to the
+    third argument in the function - C
+
+    """
+    pool = tuple(iterable)
+    n = len(pool)
+    if r > n:
+        return
+    # indices contain indexes that are candidates to be in a new subset.
+    indices = list(range(r))
+    # get sum according to indexes in indices
+    s = sum(pool[k] for k in indices)
+    if s <= c:
+        yield tuple(pool[i] for i in indices)
+    while True:
+        for i in reversed(range(r)):
+            if indices[i] != i + n - r:
+                break
+        else:
+            return
+        indices[i] += 1
+        for j in range(i+1, r):
+            indices[j] = indices[j-1] + 1
+
+        # get sum according to indexes in indices
+        s = sum(pool[k] for k in indices)
+        if s <= c:
+            yield tuple(pool[i] for i in indices)
+
 
 def bounded_subset(s: List[int], c: int):
     """"
     generator that provides subsets from a list, which are less than or equal to the number C
+
     >>> for s in bounded_subset([1,2,3,4,5],0): print(s)
     []
     >>> for s in bounded_subset([1,2,3],4): print(s)
@@ -42,10 +76,9 @@ def bounded_subset(s: List[int], c: int):
             break
 
         # get all combination(this generator not really subsets) with i elements
-        subsets = combinations(s, i)
+        subsets = comb(s, i, c)
         for subset in subsets:
-            if sum(subset) <= c:
-                yield list(subset)
+            yield list(subset)
 
 
 def bounded_subset_sorted(s: List[int], c: int):
@@ -101,10 +134,9 @@ def bounded_subset_sorted(s: List[int], c: int):
             break
     # get chain of all combination (generators, not really subsets) up to m elements,
     # than sort them by sum
-    subsets = chain.from_iterable(combinations(s, i) for i in range(m + 1))
+    subsets = chain.from_iterable(comb(s, i, c) for i in range(m + 1))
     for subset in sorted(subsets, key=sum):
-        if sum(subset) <= c:
-            yield list(subset)
+        yield list(subset)
 
 
 if __name__ == '__main__':

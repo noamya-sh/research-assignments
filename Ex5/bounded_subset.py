@@ -10,7 +10,15 @@ def comb(iterable, r, c):
     third argument in the function - C
 
     """
-    pool = tuple(iterable)
+    # my addition: remove unnecessary elements
+    so = sorted(iterable)
+    new= iterable.copy()
+    if r > 1:
+        while r < len(so) and sum(so[:r - 1]) <= c < sum(so[:r - 1]) + so[-1]:
+                new.remove(so[-1])
+                so.pop()
+
+    pool = tuple(new)
     n = len(pool)
     if r > n:
         return
@@ -140,4 +148,6 @@ def bounded_subset_sorted(s: List[int], c: int):
 
 
 if __name__ == '__main__':
-    doctest.testmod(optionflags=doctest.ELLIPSIS)
+    # doctest.testmod(optionflags=doctest.ELLIPSIS)
+    for s in bounded_subset_sorted(list(range(90,100))+list(range(920,1000)),1000):
+        print(s)

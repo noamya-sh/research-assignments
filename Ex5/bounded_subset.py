@@ -1,5 +1,5 @@
 import doctest
-from itertools import combinations, chain
+from itertools import chain
 from typing import List
 
 def comb(iterable, r, c):

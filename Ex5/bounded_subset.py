@@ -62,17 +62,17 @@ def bounded_subset(s: List[int], c: int):
     >>> for s in bounded_subset([0.2,-4,3.5,2,8],0): print(s)
     []
     [-4]
-    [-4, 0.2]
-    [-4, 2]
+    [0.2, -4]
     [-4, 3.5]
-    [-4, 0.2, 2]
-    [-4, 0.2, 3.5]
+    [-4, 2]
+    [0.2, -4, 3.5]
+    [0.2, -4, 2]
     """
-    s = sorted(s)
+    sortedList = sorted(s)
     for i in range(len(s) + 1):
         # if sum of n-min greater than c, all combinations
         # with n elements will be greater than c
-        if sum(s[:i]) > c:
+        if sum(sortedList[:i]) > c:
             break
 
         # get all combination(this generator not really subsets) with i elements
@@ -113,23 +113,23 @@ def bounded_subset_sorted(s: List[int], c: int):
     [0, 0.5]
     [1]
     ...
-    [0, 0.5, 1, 2]
-    [1, 3]
-    [0, 1, 3]
+    [2, 0, 1, 0.5]
+    [3, 1]
+    [3, 0, 1]
     >>> for s in bounded_subset_sorted([0.2,-4,3.5,2,8],0): print(s)
     [-4]
-    [-4, 0.2]
+    [0.2, -4]
     [-4, 2]
-    [-4, 0.2, 2]
+    [0.2, -4, 2]
     [-4, 3.5]
-    [-4, 0.2, 3.5]
+    [0.2, -4, 3.5]
     []
     """
-    s = sorted(s)
+    sortedList = sorted(s)
     m = len(s)
     # first get maximum number of element that combination of them small or equals to c
     for i in range(len(s) + 1):
-        if sum(s[:i]) > c:
+        if sum(sortedList[:i]) > c:
             m = i
             break
     # get chain of all combination (generators, not really subsets) up to m elements,

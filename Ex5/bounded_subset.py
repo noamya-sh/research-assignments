@@ -16,7 +16,7 @@ def comb(iterable, r, c):
         return
     # indices contain indexes that are candidates to be in a new subset.
     indices = list(range(r))
-    # get sum according to indexes in indices
+    # my addition: get sum according to indexes in indices
     s = sum(pool[k] for k in indices)
     if s <= c:
         yield tuple(pool[i] for i in indices)
@@ -30,7 +30,7 @@ def comb(iterable, r, c):
         for j in range(i+1, r):
             indices[j] = indices[j-1] + 1
 
-        # get sum according to indexes in indices
+        # my addition: get sum according to indexes in indices
         s = sum(pool[k] for k in indices)
         if s <= c:
             yield tuple(pool[i] for i in indices)

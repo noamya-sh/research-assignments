@@ -3,7 +3,7 @@ from mst import *
 import doctest
 # For Prim and Kruskal coding I was inspired by geeksforgeeks.com
 
-def getMST(algoritm: Callable, graph: list, mst: Mst = MstKeepingSum):
+def getMST(algorithm: Callable, graph: list, mst: Mst = MstKeepingSum):
     """
     >>> INF = float('inf')
     >>> mat = [[INF, 2, 1, 6, 5],
@@ -36,7 +36,7 @@ def getMST(algoritm: Callable, graph: list, mst: Mst = MstKeepingSum):
         graph = tupGraph(graph['vertices'], graph['edges'])
     else:  # graph is a adjacency matrix
         graph = MatrixGraph(len(graph), graph)
-    mst = algoritm(mst, graph)
+    mst = algorithm(mst, graph)
     return mst.result()
 
 

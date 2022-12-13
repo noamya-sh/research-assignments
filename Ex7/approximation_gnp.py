@@ -32,6 +32,7 @@ def plot_apx_vs_real(prob: list, idx: list, size_v: int):
             r.append(ratio)
             k.append(max_clique_approximation(g))
             j.append(max_clique_real(g))
+            print(i)
         axs[ind].plot(k, 'gold', j, 'navy', r, '--')
         axs[ind].set_title("probability = {x}".format(x=p))
     fig.figure.supxlabel("number of vertices of graph")
@@ -40,4 +41,4 @@ def plot_apx_vs_real(prob: list, idx: list, size_v: int):
     plt.show()
 
 
-plot_apx_vs_real([0.9, 0.7, 0.5, 0.25], [(0, 0), (0, 1), (1, 0), (1, 1)], 100)
+plot_apx_vs_real([0.85, 0.65, 0.5, 0.25], [(0, 0), (0, 1), (1, 0), (1, 1)], 100)

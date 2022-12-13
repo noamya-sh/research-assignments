@@ -28,7 +28,7 @@ def linear_system_numpy(n: int):
     start = time.time()
     a = np.random.randint(SIZE, size=(n, n))
     b = np.random.randint(SIZE, size=n)
-    x = np.linalg.solve(a, b)
+    np.linalg.solve(a, b)
     end = time.time()
     return end - start
 
@@ -43,4 +43,5 @@ plt.plot(l_num, 'g', l_cvx, 'r')
 plt.xlabel("number of variables")
 plt.ylabel("time (in sec)")
 plt.legend(["numpy", "cxvpy"])
+plt.figure(figsize=(8,10))
 plt.show()
